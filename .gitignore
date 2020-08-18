@@ -30,3 +30,30 @@
 *.exe
 *.out
 *.app
+
+# MAC temp fiel
+.DS_Store
+
+# IDE file
+.idea
+.vscode
+.clang-format
+
+# PyTorch weighst file
+*.pth
+*.pt
+
+# PyTorch auto run file
+*.pyc
+
+# Cmake build folder
+build
+cmake-build-debug
+
+# TensorRT weights file
+*.wts
+
+# Data folder
+data/MNIST
+
+

@@ -45,25 +45,23 @@ include_directories(${CUDA_INCLUDE_DIRS})
 link_directories(/usr/local/cuda/lib64)
 
 # Create all static library
-add_library(common SHARED common.cpp)
-add_library(logging SHARED logging.cpp)
-add_library(load_weights SHARED weight.cpp)
-add_library(inference SHARED inference.cpp)
-# Link all include file
-target_include_directories(common PUBLIC ../include)
+add_library(tensorrt_common SHARED common.cpp)
+add_library(tensorrt_logging SHARED logging.cpp)
+add_library(tensorrt_load_weights SHARED weight.cpp)
+add_library(tensorrt_inference SHARED inference.cpp)
 
 # Install  all static library
-install(TARGETS common
-        LIBRARY DESTINATION lib/tensorrt
+install(TARGETS tensorrt_common
+        LIBRARY DESTINATION lib
         PUBLIC_HEADER DESTINATION include/tensorrt)
-install(TARGETS logging
-        LIBRARY DESTINATION lib/tensorrt
+install(TARGETS tensorrt_logging
+        LIBRARY DESTINATION lib
         PUBLIC_HEADER DESTINATION include/tensorrt)
-install(TARGETS load_weights
-        LIBRARY DESTINATION lib/tensorrt
+install(TARGETS tensorrt_load_weights
+        LIBRARY DESTINATION lib
         PUBLIC_HEADER DESTINATION include/tensorrt)
-install(TARGETS inference
-        LIBRARY DESTINATION lib/tensorrt
+install(TARGETS tensorrt_inference
+        LIBRARY DESTINATION lib
         PUBLIC_HEADER DESTINATION include/tensorrt)
 install(FILES ../include/common.h DESTINATION include/tensorrt)
 install(FILES ../include/logging.h DESTINATION include/tensorrt)
@@ -71,12 +69,12 @@ install(FILES ../include/weight.h DESTINATION include/tensorrt)
 install(FILES ../include/inference.h DESTINATION include/tensorrt)
 
 # Link common with all libraries
-target_link_libraries(common ${OpenCV_LIBS} nvinfer cudart)
-target_link_libraries(logging ${OpenCV_LIBS} nvinfer cudart)
-target_link_libraries(load_weights ${OpenCV_LIBS} nvinfer cudart logging)
-target_link_libraries(inference ${OpenCV_LIBS} nvinfer cudart)
+target_link_libraries(tensorrt_common ${OpenCV_LIBS} nvinfer cudart)
+target_link_libraries(tensorrt_logging ${OpenCV_LIBS} nvinfer cudart)
+target_link_libraries(tensorrt_load_weights ${OpenCV_LIBS} nvinfer cudart)
+target_link_libraries(tensorrt_inference ${OpenCV_LIBS} nvinfer cudart)
 # Set library version
-set_target_properties(common PROPERTIES VERSION 1.1.0 SOVERSION 1)
-set_target_properties(logging PROPERTIES VERSION 1.1.0 SOVERSION 1)
-set_target_properties(load_weights PROPERTIES VERSION 1.1.0 SOVERSION 1)
-set_target_properties(inference PROPERTIES VERSION 1.1.0 SOVERSION 1)
+set_target_properties(tensorrt_common PROPERTIES VERSION 1.1.0 SOVERSION 1)
+set_target_properties(tensorrt_logging PROPERTIES VERSION 1.1.0 SOVERSION 1)
+set_target_properties(tensorrt_load_weights PROPERTIES VERSION 1.1.0 SOVERSION 1)
+set_target_properties(tensorrt_inference PROPERTIES VERSION 1.1.0 SOVERSION 1)
